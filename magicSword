@@ -1,0 +1,21 @@
+function magic(p: player, dmg: number, s: string, pt: string):
+    execute console command "/execute %{_p}% ~ ~ ~ /playsound minecraft:%{_s}% master %{_p}% ~ ~ ~ 1 2"
+    set {_loc} to location of {_p}
+    add 1.5 to y-coordinate of {_loc}
+    set {_a2} to yaw of location of {_p} - 270
+    set {_a1} to Pitch of location of {_p} * -1
+    set {_x} to sin(90-{_a1}) * cos({_a2}) * 1
+    set {_z} to sin(90-{_a1}) * sin({_a2}) * 1
+    set {_y} to cos(90-{_a1}) * 1
+    loop 20 times:
+        add {_x} to x-coordinate of {_loc}
+        add {_y} to y-coordinate of {_loc}
+        add {_z} to z-coordinate of {_loc}
+        if block at {_loc} is not air:
+            stop
+        execute console command "particle %{_pt}% %x-coordinate of {_loc}% %y-coordinate of {_loc}% %z-coordinate of {_loc}% 0 0 0 0 10"
+        loop living entities in radius 1.5 of {_loc}:
+            damage({_p}, loop-entity, 2)
+            execute console command "particle %{_pt}% %x-coordinate of {_loc}% %y-coordinate of {_loc}% %z-coordinate of {_loc}% 0.5 0 0.5 0 10"
+            stop
+        wait a tick
