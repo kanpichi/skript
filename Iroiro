@@ -1,0 +1,12 @@
+command /skin <player> [<offline player>]:
+  permission: op
+  trigger:
+    send a "get" request to "https://api.mineskin.org/generate/user/%UUID of arg-2%"
+    set {_resp} to the last http response
+    set {_body} to {_resp}'s body
+    copy json from {_body} to variable {_json::*}
+    if arg-2 is set:
+      set arg-1's displayed skin to skin with value "%{_json::data::texture::value}%" signature "%{_json::data::texture::signature}%"
+    else:
+      set player's displayed skin to arg-1's skin
+      
