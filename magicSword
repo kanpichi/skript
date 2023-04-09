@@ -15,6 +15,7 @@ function magic(p: player, dmg: number, s: string, pt: string):
             stop
         execute console command "particle %{_pt}% %x-coordinate of {_loc}% %y-coordinate of {_loc}% %z-coordinate of {_loc}% 0 0 0 0 10"
         loop living entities in radius 1.5 of {_loc}:
+            loop-entity is not {_p}
             damage({_p}, loop-entity, 2)
             execute console command "particle %{_pt}% %x-coordinate of {_loc}% %y-coordinate of {_loc}% %z-coordinate of {_loc}% 0.5 0 0.5 0 10"
             stop
@@ -26,9 +27,15 @@ function apply(s: player, e: potion type):
     
 #weapon
 on leftclick:
-    if player'S tool is iron sword named "&6エクスカリバー":
-        magic(player, 4, "entity.player.attack.sweep", "sweepAttack")
+    if player'S tool is iron sword:
+        name of player's tool is "&6エクスカリバー"
+        if difference between now and {%player's uuid%.exc.lastUsed} is less than 1 second:
+            stop
+        else:
+            set {%player's uuid%.exc.lastUsed} to now
+            magic(player, 4, "entity.player.attack.sweep", "sweepAttack")
         
 on damage:
-    if attacker's tool is wooden sword named "&2ククリナイフ":
+    if attacker's tool is wooden sword:
+        name of attacker's tool is "&2ククリナイフ"
         apply(victim, poison)
