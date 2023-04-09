@@ -25,6 +25,10 @@ function apply(s: player, e: potion type):
     apply {_e} 2 without particles to {_s} for 2 seconds
     
 #weapon
+on leftclick:
+    if player'S tool is iron sword named "&6エクスカリバー":
+        magic(player, 2, "entity.player.attack.sweep", "sweepAttack")
+        
 on damage:
-    if attacker'S tool is iron sword named "&6エクスカリバー":
-        magic(attacker, 2, "entity.player.attack.sweep", "sweepAttack")
+    if attacker's tool is wooden sword named "&2ククリナイフ":
+        apply(victim, poison)
