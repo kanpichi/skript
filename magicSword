@@ -19,3 +19,12 @@ function magic(p: player, dmg: number, s: string, pt: string):
             execute console command "particle %{_pt}% %x-coordinate of {_loc}% %y-coordinate of {_loc}% %z-coordinate of {_loc}% 0.5 0 0.5 0 10"
             stop
         wait a tick
+
+function apply(s: player, e: potion type):
+    remove {_e} from {_s}
+    apply {_e} 2 without particles to {_s} for 2 seconds
+    
+#weapon
+on damage:
+    if attacker'S tool is iron sword named "&6エクスカリバー":
+        magic(attacker, 2, "entity.player.attack.sweep", "sweepAttack")
