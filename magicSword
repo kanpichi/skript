@@ -27,7 +27,7 @@ function apply(s: player, e: potion type):
 #weapon
 on leftclick:
     if player'S tool is iron sword named "&6エクスカリバー":
-        magic(player, 2, "entity.player.attack.sweep", "sweepAttack")
+        magic(player, 4, "entity.player.attack.sweep", "sweepAttack")
         
 on damage:
     if attacker's tool is wooden sword named "&2ククリナイフ":
